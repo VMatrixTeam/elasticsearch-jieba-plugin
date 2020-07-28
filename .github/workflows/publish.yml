@@ -24,8 +24,6 @@ jobs:
       run: |
         gradle wrapper
         ./gradlew pz
-        cd build/distributions
-        zip -r ../artifacts.zip .
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -43,6 +41,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./build/artifacts.zip
+        asset_path: ./build/distributions/elasticsearch-jieba-plugin-${{ steps.tagName.outputs.tag }}.zip
         asset_name: elasticsearch-jieba-plugin-${{ steps.tagName.outputs.tag }}.zip
         asset_content_type: application/zip
